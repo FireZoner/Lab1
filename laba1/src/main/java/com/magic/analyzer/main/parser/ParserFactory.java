@@ -15,19 +15,19 @@ public class ParserFactory {
         String filename = file.getName().toLowerCase();
         
         if(filename.endsWith(".json")) {
-            
+           return null; 
         }
         else if(filename.endsWith(".txt")) {
-            
+           return null;
         }
         else if(filename.endsWith(".xml")) {
-            
+           return null;
         } else {
             throw new IllegalArgumentException("Неподдерживаемый формат файла " + file.getName());
         }
-        
-        public static MissionParser getParserByContent(File file) {
-            return getParser(file);
-        }
+    }
+    
+    public static MissionParser getParserByContent(File file) {
+        return getParser(file);
     }
 }

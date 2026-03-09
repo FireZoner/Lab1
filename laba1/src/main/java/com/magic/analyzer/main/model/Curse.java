@@ -19,6 +19,9 @@ public class Curse {
         this.threatLevel = threatLevel;
     }
     
+    public Curse() {
+    }
+    
     public String getName() {
         return this.name;
     }

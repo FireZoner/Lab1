@@ -19,6 +19,9 @@ public class Sorcerer {
         this.rank = rank;
     }
     
+    public Sorcerer() {
+    }
+    
     public String getName() {
         return this.name;
     }
