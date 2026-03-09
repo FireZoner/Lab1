@@ -95,6 +95,7 @@ public class TextParser implements MissionParser {
                                    Map<Integer, Technique> techniqueMap) {
         if(key.startsWith("curse")) curseKeyProcessing(key.substring(6), value, mission);
         if(key.startsWith("sorcerer[")) sorcererKeyProcessing(key, value, sorcererMap);
+        if(key.startsWith("technique[")) techniqueKeyProcessing(key, value, techniqueMap);
     }
     
     private void curseKeyProcessing(String curseKey, String curseValue, Mission mission) {
@@ -149,6 +150,35 @@ public class TextParser implements MissionParser {
                 sorcerer.setRank(Rank.valueOf(sorcererValue));
             } catch (IllegalArgumentException e) {
                 System.out.println("Неизвестный rank: " + sorcererValue);
+            }
+        }
+    }
+    
+    private void techniqueKeyProcessing(String techniqueKey, String techniqueValue, Map<Integer, Technique> techniqueMap) {
+        int index = extractIndex(techniqueKey);
+        if (index == -1) return;
+        
+        Technique technique = techniqueMap.get(index);
+        if (technique == null) {
+            technique = new Technique();
+            techniqueMap.put(index, technique);
+        }
+        
+        if (techniqueKey.endsWith(".name")) {
+            technique.setName(techniqueValue);
+        } else if (techniqueKey.endsWith(".type")) {
+            try {
+                technique.setType(TechniqueType.valueOf(techniqueValue));
+            } catch (IllegalArgumentException e) {
+                System.out.println("Неизвестный technique type: " + techniqueValue);
+            }
+        } else if (techniqueKey.endsWith(".owner")) {
+            technique.setOwner(new Sorcerer(techniqueValue, null));
+        } else if (techniqueKey.endsWith(".damage")) {
+            try {
+                technique.setDamage(Long.parseLong(techniqueValue));
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка парсинга damage: " + techniqueValue);
             }
         }
     }
