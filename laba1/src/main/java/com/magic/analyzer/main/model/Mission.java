@@ -5,7 +5,6 @@
 package com.magic.analyzer.main.model;
 
 import com.magic.analyzer.main.model.enums.Outcome;
-import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -14,7 +13,7 @@ import java.util.*;
  */
 public class Mission {
     private String missionId;
-    private LocalDate date;
+    private String date;
     private String location;
     private Outcome outcome;
     private long damageCost;
@@ -37,11 +36,11 @@ public class Mission {
         this.missionId = missionId;
     }
     
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
     
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
     

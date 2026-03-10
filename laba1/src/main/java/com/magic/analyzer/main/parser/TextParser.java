@@ -61,7 +61,7 @@ public class TextParser implements MissionParser {
                 break;
             case "date":
                 try {
-                    mission.setDate(LocalDate.parse(value));
+                    mission.setDate(value);
                 } catch (DateTimeParseException e) {
                     System.out.println("Ошибка парсинга даты: " + value);
                 }

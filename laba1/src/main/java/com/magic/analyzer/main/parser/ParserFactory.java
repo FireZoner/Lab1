@@ -18,7 +18,7 @@ public class ParserFactory {
            return new TextParser(); 
         }
         else if(filename.endsWith(".txt")) {
-           return null;
+           return new JsonParser();
         }
         else if(filename.endsWith(".xml")) {
            return null;
