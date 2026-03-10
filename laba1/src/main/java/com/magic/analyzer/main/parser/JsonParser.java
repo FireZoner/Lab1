@@ -6,14 +6,13 @@ package com.magic.analyzer.main.parser;
 
 import com.fasterxml.jackson.databind.*;
 import com.magic.analyzer.main.model.*;
-import com.magic.analyzer.main.model.enums.*;
 import java.io.*;
 
 /**
  *
  * @author zubbo
  */
-public class JsonParser implements MissionParser {
+public class JsonParser extends BaseParser {
    private final ObjectMapper objectMapper; 
 
    public JsonParser() {
@@ -83,72 +82,5 @@ public class JsonParser implements MissionParser {
         }
         
         return mission;
-    }
-    
-    private String getString(JsonNode node, String field) {
-        JsonNode value = node.get(field);
-        return value != null && !value.isNull() ? value.asText() : null;
-    }
-    
-    private long getLong(JsonNode node, String field) {
-        JsonNode value = node.get(field);
-        return value != null && !value.isNull() ? value.asLong() : 0;
-    }
-    
-    private Outcome getOutcome(JsonNode node, String field) {
-        String value = getString(node, field);
-        if (value == null) return null;
-        
-        try {
-            return Outcome.valueOf(value);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Неизвестный Outcome: " + value);
-            return null;
-        }
-    }
-    
-    private ThreatLevel getThreatLevel(JsonNode node, String field) {
-        String value = getString(node, field);
-        if (value == null) return null;
-        
-        try {
-            return ThreatLevel.valueOf(value);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Неизвестный ThreatLevel: " + value);
-            return null;
-        }
-    }
-    
-    private Rank getRank(JsonNode node, String field) {
-        String value = getString(node, field);
-        if (value == null) return null;
-        
-        try {
-            return Rank.valueOf(value);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Неизвестный Rank: " + value);
-            return null;
-        }
-    }
-    
-    private TechniqueType getTechniqueType(JsonNode node, String field) {
-        String value = getString(node, field);
-        if (value == null) return null;
-        
-        try {
-            return TechniqueType.valueOf(value);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Неизвестный TechniqueType: " + value);
-            return null;
-        }
-    }
-    
-    private Sorcerer findSorcererByName(Mission mission, String name) {
-        for (Sorcerer s : mission.getSorcerers()) {
-            if (s.getName() != null && s.getName().equals(name)) {
-                return s;
-            }
-        }
-        return null;
     }
 }

@@ -14,10 +14,10 @@ public class ParserFactory {
     public static MissionParser getParser(File file) {
         String filename = file.getName().toLowerCase();
         
-        if(filename.endsWith(".json")) {
+        if(filename.endsWith(".txt")) {
            return new TextParser(); 
         }
-        else if(filename.endsWith(".txt")) {
+        else if(filename.endsWith(".json")) {
            return new JsonParser();
         }
         else if(filename.endsWith(".xml")) {
